@@ -1,0 +1,9 @@
+<%= c.label :value, c.object.question.title %>
+
+<% c.object.question.possible_answers.each do |possible_answer| %>
+	<div class="form-group">
+		<%= c.radio_button :possible_answer_id, possible_answer.id %>
+		<%= c.hidden_field :question_id %>
+		<%= possible_answer.title %>		
+	</div>
+<% end %>

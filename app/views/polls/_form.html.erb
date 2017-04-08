@@ -1,0 +1,13 @@
+	<%= form_for @poll do |f| %>
+		<div class="form-group">
+			<%= f.label :title %>
+			<%= f.text_field :title, class: "form-control" %>
+		</div>
+		
+		<% if params[:action] == "edit" %>
+			<%= f.submit "Update", class: "btn btn-info" %>
+		<% else %>
+			<%= f.submit "Save", class: "btn btn-info" %>
+		<% end %>
+
+	<% end %>

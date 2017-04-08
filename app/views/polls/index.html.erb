@@ -1,0 +1,22 @@
+<div class="container">
+
+	<% @polls.each do |poll| %>
+
+		<div class="well">
+			<%= link_to poll_path(poll) do %>
+				<h1><%= poll.title %></h1>
+			<% end %>
+			<br>
+			<div class="btn-group" role="group" aria-label="...">
+				<%= link_to "Edit", edit_poll_path(poll), class: "btn btn-default" %>
+				<%= link_to "Back", polls_path, class: "btn btn-default" %>
+				<%= link_to "Add Questions", new_poll_question_path(poll), class: "btn btn-primary" %>
+			</div>
+			<%= link_to "Delete", poll_path(poll), method: :delete, data: { confirm: "Sure to delete?" }, class: "btn btn-danger pull-right" %>
+		</div>
+
+	<% end %>
+
+	<hr>
+	<%= link_to "New Poll", new_poll_path, class: "btn btn-primary" %>
+</div>

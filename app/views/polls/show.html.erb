@@ -1,0 +1,55 @@
+<div class="container">
+
+	<div class="well" style="background: yellow">
+		<h1><%= @poll.title %></h1>
+		<br>
+		<div class="btn-group" role="group" aria-label="...">
+			<%= link_to "Edit", edit_poll_path(@poll), class: "btn btn-default" %>
+			<%= link_to "Back", polls_path, class: "btn btn-default" %>
+			<%= link_to "Add Questions", new_poll_question_path(@poll), class: "btn btn-default" %>
+			<%= link_to "Answer", new_poll_reply_path(@poll), class: "btn btn-default" %>
+		</div>
+		<%= link_to "Delete", poll_path(@poll), method: :delete, data: { confirm: "Sure to delete?" }, class: "btn btn-danger pull-right" %>
+
+		<hr>
+		<h2>Questions</h2>
+		<% @questions.each do |question|  %>
+			<ul>
+				<li>
+					<%= question.title %>
+					<ul>
+						<% question.possible_answers.each do |possible_answer| %>
+							<li><%= possible_answer.title %></li>
+						<% end %>
+					</ul>
+				</li>
+			</ul>
+		<% end %>
+	</div>
+
+	<h2>Replies</h2>
+	<% @poll.replies.each do |reply| %>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					
+					<div class="panel-heading text-right">
+						<%= time_ago_in_words(reply.created_at) %>
+					</div>
+
+					<div class="panel-body">
+						<dl>
+							<% reply.answers.each do |answer| %>
+								<dt><%= answer.question.title %></dt>
+								<dd><%= answer.value.present? ? answer.value : answer.possible_answer.title %></dd>
+							<% end %>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+	<hr>
+	<%= link_to "New Poll", new_poll_path, class: "btn btn-primary" %>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+	<h1> <%= @poll.title %> </h1>
+	<hr>
+	<%= form_for([ @poll, @reply ]) do |f| %>
+		<%= f.fields_for :answers do |c| %>
+			<p>
+				<%= render c.object.question.kind, c: c %>
+			</p>
+		<% end %>
+
+		<%= f.submit "Finish Poll", class: "btn btn-primary" %>
+
+	<% end %>
+</div>
